@@ -64,7 +64,6 @@ class TestRailReporter extends WDIOReporter {
     this.fails++;
     this.out.push(test.title + ': fail');
     let caseIds = titleToCaseIds(test.title);
-    this.log.debug(test)
     if (caseIds.length > 0) {
       let results = caseIds.map((caseId) => {
         return {

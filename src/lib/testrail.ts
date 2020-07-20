@@ -13,7 +13,6 @@ export class TestRail {
     // compute base url
     this.base = `https://${options.testRailUrl}/index.php`;
     this.log = logger('wdio-testrail-reporter');
-    this.log.debug(options)
   }
 
   private _post(api: String, body: any, callback: Function, error?: Function) {

@@ -11,7 +11,6 @@ class TestRail {
         // compute base url
         this.base = `https://${options.testRailUrl}/index.php`;
         this.log = logger_1.default('wdio-testrail-reporter');
-        this.log.debug(options);
     }
     _post(api, body, callback, error) {
         var req = request('POST', this.base)

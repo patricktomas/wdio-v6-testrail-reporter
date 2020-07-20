@@ -54,7 +54,6 @@ class TestRailReporter extends reporter_1.default {
         this.fails++;
         this.out.push(test.title + ': fail');
         let caseIds = shared_1.titleToCaseIds(test.title);
-        this.log.debug(test);
         if (caseIds.length > 0) {
             let results = caseIds.map((caseId) => {
                 return {
