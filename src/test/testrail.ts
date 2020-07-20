@@ -1,10 +1,10 @@
 import {TestRail} from "../lib/testrail";
 import {TestRailResult, TestRailCase, Status} from "../lib/testrail.interface";
 
-describe("TestRail API", () => {
+describe.skip("TestRail API", () => {
     it("Publish test run", (done) => {
         let testRail = new TestRail({
-            domain: process.env.DOMAIN,
+            testRailUrl: process.env.DOMAIN,
             username: process.env.USERNAME,
             password: process.env.PASSWORD,
             projectId: 10,

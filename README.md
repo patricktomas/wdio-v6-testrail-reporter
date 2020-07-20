@@ -1,58 +1,42 @@
-#Testrail Reporter for Mocha
+# WDIO Mocha Testrail Reporter
 
-[![npm version](https://badge.fury.io/js/mocha-testrail-reporter.svg)](https://badge.fury.io/js/mocha-testrail-reporter)
+====================
+> A WebdriverIO v6 reporter for Testrail. Yes, it works on my machine.
+> For v4 version see [original reporter](https://github.com/oxynade/wdio-testrail-reporter)
 
-Pushes test results into Testrail system.
+## Configuration
 
-## Installation
+Add this line to your devDependencies in package.json:
 
-```shell
-$ npm install mocha-testrail-reporter --save-dev
+`
+"wdio-v6-testrail-reporter": "https://github.com/Virtim/wdio-v6-testrail-reporter.git",
+`
+
+Import this library in you wdio.conf.js
+
+```js
+const TestRailReporter = require('../wdio-v6-testrail-reporter')
 ```
 
-## Usage
-Ensure that your testrail installation API is enabled and generate your API keys. See http://docs.gurock.com/
+Your reporters should look like this:
 
-Run mocha with `mocha-testrail-reporter`:
-
-```shell
-$ mocha test --reporter mocha-testrail-reporter --reporter-options domain=instance.testrail.net,username=test@example.com,password=12345678,projectId=1,suiteId=1
+```js
+    reporters: ['spec', [TestRailReporter, {
+      testRailUrl: 'YourCompanyName.testrail.io',
+      username: 'email@companyname.com',
+      password: 'testrail api key',
+      projectId: number,
+      suiteId: number,
+      runName: string,
+      includeAll: true,
+    }]],
 ```
-
-or use a mocha.options file
-```shell
-mocha --opts mocha-testrail.opts build/test
---recursive
---reporter mocha-testrail-reporter
---reporter-options domain=instance.testrail.net,username=test@example.com,password=12345678,projectId=1,suiteId=1
---no-exit
-```
-
-
-Mark your mocha test names with ID of Testrail test cases. Ensure that your case ids are well distinct from test descriptions.
- 
-```Javascript
-it("C123 C124 Authenticate with invalid user", . . .
-it("Authenticate a valid user C321", . . .
-```
-
-Only passed or failed tests will be published. Skipped or pending tests will not be published resulting in a "Pending" status in testrail test run.
-
-## Options
-
-**domain**: *string* domain name of your Testrail instance (e.g. for a hosted instance instance.testrail.net)
-
-**username**: *string* user under which the test run will be created (e.g. jenkins or ci)
-
-**password**: *string* password or API token for user
-
-**projectId**: *number* projet number with which the tests are associated
-
-**suiteId**: *number* suite number with which the tests are associated
-
-**assignedToId**: *number* (optional) user id which will be assigned failed tests
 
 ## References
-- http://mochajs.org/#mochaopts
-- https://github.com/mochajs/mocha/wiki/Third-party-reporters
+
+- https://www.npmjs.com/package/mocha-testrail-reporter
+- https://www.npmjs.com/package/wdio-v5-testrail-reporter
+- https://www.npmjs.com/package/wdio-testrail-reporter
+- https://www.npmjs.com/package/wdio-reportportal-reporter
+- http://webdriver.io/guide/reporters/customreporter.html
 - http://docs.gurock.com/testrail-api2/start

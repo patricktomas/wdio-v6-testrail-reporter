@@ -1,32 +1,34 @@
 {
-  "name": "mocha-testrail-reporter",
-  "version": "1.0.12",
-  "description": "A Testrail reporter for mocha including TestRail API basic library",
+  "name": "wdio-v6-testrail-reporter",
+  "version": "0.0.1",
+  "description": "A Testrail reporter for WebdriverIO v6 including TestRail API basic library",
   "main": "index.js",
+  "types": "index.d.ts",
   "private": false,
   "keywords": [
     "mocha",
+    "webdriverio",
     "testrail",
     "reporter"
   ],
   "author": {
-    "name": "Pierre Awaragi",
-    "email": "pierre@awaragi.com"
+    "name": "Timur Minnakhmetov",
+    "email": "timvir@gmail.com"
   },
   "license": "MIT",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/awaragi/mocha-testrail-reporter.git"
+    "url": "https://github.com/Virtim/wdio-v6-testrail-reporter.git"
   },
   "bugs": {
-    "url": "https://github.com/awaragi/mocha-testrail-reporter/issues"
+    "url": "https://github.com/Virtim/wdio-v6-testrail-reporter/issues"
   },
   "scripts": {
     "tsc": "tsc",
     "clean": "rimraf dist",
     "test": "mocha dist/test",
-    "build": "npm run clean && npm run tsc"
+    "build": "yarn run clean && yarn run tsc"
   },
   "dependencies": {
     "btoa": "^1.1.2",
@@ -39,7 +41,10 @@
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.36",
     "@types/node": "^6.0.58",
+    "@wdio/logger": "^6.0.16",
+    "@wdio/reporter": "^6.3.0",
     "chai": "^3.5.0",
+    "prettier": "^2.0.5",
     "rimraf": "^2.5.4",
     "typescript": "^2.1.4"
   }
