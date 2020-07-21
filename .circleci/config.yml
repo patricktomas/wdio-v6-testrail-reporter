@@ -40,7 +40,7 @@ jobs:
           command: touch .npmrc && echo '//registry.npmjs.org/:_authToken="$NPM_TOKEN"' > .npmrc
       - run:
           name: Publish package
-          command: yarn publish
+          command: yarn npm publish
             
 workflows:
   version: 2
