@@ -15,7 +15,7 @@ Add this line to your devDependencies in package.json:
 Import this library in you wdio.conf.js
 
 ```js
-const TestRailReporter = require('../wdio-v6-testrail-reporter')
+const TestRailReporter = require('wdio-v6-testrail-reporter')
 ```
 
 Your reporters should look like this:
