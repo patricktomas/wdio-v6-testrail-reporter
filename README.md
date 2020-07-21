@@ -1,4 +1,4 @@
-# WDIO Mocha Testrail Reporter
+# WebdriverIO v6 Mocha Testrail Reporter
 
 ====================
 > A WebdriverIO v6 reporter for Testrail. Yes, it works on my machine.
