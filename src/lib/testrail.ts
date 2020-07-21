@@ -1,6 +1,6 @@
 import request = require('unirest');
 import logger from '@wdio/logger';
-import {TestRailOptions, TestRailResult} from "./testrail.interface";
+import { TestRailOptions, TestRailResult } from './testrail.interface';
 
 /**
  * TestRail basic API wrapper

@@ -6,7 +6,7 @@
 
 ## Configuration
 
-Npm install
+Npm Install:
 `
 npm i wdio-v6-testrail-reporter --save-dev
 `
