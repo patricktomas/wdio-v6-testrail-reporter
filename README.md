@@ -6,7 +6,7 @@
 
 ## Configuration
 
-Npm install
+Npm Install:
 `
 npm i wdio-v6-testrail-reporter --save-dev
 `
@@ -14,13 +14,7 @@ npm i wdio-v6-testrail-reporter --save-dev
 Yarn Install:
 
 `
-yarn add -D
-`
-
-Or add this line to your devDependencies in package.json:
-
-`
-"wdio-v6-testrail-reporter": "https://github.com/Virtim/wdio-v6-testrail-reporter.git",
+yarn add -D wdio-v6-testrail-reporter
 `
 
 Import this library in you wdio.conf.js

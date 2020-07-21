@@ -1,6 +1,6 @@
 import logger from '@wdio/logger';
 import WDIOReporter from '@wdio/reporter';
-import {TestRail} from "./testrail";
+import { TestRail } from './testrail';
 import { Status } from './testrail.interface';
 import { titleToCaseIds } from './shared';
 
