@@ -37,7 +37,7 @@ jobs:
           at: ~/repo
       - run:
           name: Authenticate with registry
-          command: touch .npmrc && echo '//registry.npmjs.org/:_authToken="$NPM_TOKEN"' > .npmrc
+          command: touch .npmrc && echo 'registry=https://registry.npmjs.org/:_authToken="$NPM_TOKEN"' > .npmrc
       - run:
           name: Publish package
           command: npm publish
