@@ -28,13 +28,13 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
-          root: ~/project
+          root: ~/repo
           paths: .
   deploy:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/project
+          at: ~/repo
       - run:
           name: Authenticate with registry
           command: touch .npmrc && echo '//registry.npmjs.org/:_authToken="$NPM_TOKEN"' > .npmrc
