@@ -28,7 +28,8 @@
     "tsc": "tsc",
     "clean": "rimraf dist",
     "test": "mocha dist/test",
-    "build": "yarn run clean && yarn run tsc"
+    "prettier": "prettier --single-quote --print-width=100 --trailing-comma=all --write './src/**/*.{js,jsx,ts,tsx}'",
+    "build": "yarn clean && yarn prettier && yarn tsc"
   },
   "dependencies": {
     "btoa": "^1.1.2",

@@ -1,4 +1,4 @@
-import { TestRailOptions, TestRailResult } from "./testrail.interface";
+import { TestRailOptions, TestRailResult } from './testrail.interface';
 /**
  * TestRail basic API wrapper
  */
