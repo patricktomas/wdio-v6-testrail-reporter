@@ -18,7 +18,7 @@ jobs:
           - v1-dependencies-
 
       - run: yarn install
-      - run: ./node_modules/.bin/mocha dist/test
+      - run: yarn test
       - run: yarn prettier --single-quote --print-width=100 --trailing-comma=all --check './src/**/*.{js,jsx,ts,tsx}'
       - run: yarn build
 
@@ -28,13 +28,13 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
-          root: ~/project
+          root: ~/repo
           paths: .
   deploy:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/project
+          at: ~/repo
       - run:
           name: Authenticate with registry
           command: touch .npmrc && echo '//registry.npmjs.org/:_authToken="$NPM_TOKEN"' > .npmrc

@@ -45,6 +45,7 @@
     "@wdio/logger": "^6.0.16",
     "@wdio/reporter": "^6.3.0",
     "chai": "^3.5.0",
+    "mocha": "^8.0.1",
     "prettier": "^2.0.5",
     "rimraf": "^2.5.4",
     "typescript": "^2.1.4"
