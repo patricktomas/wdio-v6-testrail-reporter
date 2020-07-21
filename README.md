@@ -6,7 +6,18 @@
 
 ## Configuration
 
-Add this line to your devDependencies in package.json:
+Npm install
+`
+npm i wdio-v6-testrail-reporter --save-dev
+`
+
+Yarn Install:
+
+`
+yarn add -D
+`
+
+Or add this line to your devDependencies in package.json:
 
 `
 "wdio-v6-testrail-reporter": "https://github.com/Virtim/wdio-v6-testrail-reporter.git",
@@ -15,7 +26,7 @@ Add this line to your devDependencies in package.json:
 Import this library in you wdio.conf.js
 
 ```js
-const TestRailReporter = require('../wdio-v6-testrail-reporter')
+const TestRailReporter = require('wdio-v6-testrail-reporter')
 ```
 
 Your reporters should look like this:
