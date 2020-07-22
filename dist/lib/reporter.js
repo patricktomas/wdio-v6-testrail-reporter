@@ -65,7 +65,7 @@ class TestRailReporter extends reporter_1.default {
             this.results.push(...results);
         }
     }
-    onRunnerEnd() {
+    onSuiteEnd() {
         if (this.results.length == 0) {
             this.log.error('No testcases were matched. Ensure that your tests are declared correctly and matches format Cxxx. For example C420');
         }

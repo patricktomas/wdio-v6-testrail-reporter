@@ -10,7 +10,7 @@ declare class TestRailReporter extends WDIOReporter {
     constructor(options: any);
     onTestPass(test: any): void;
     onTestFail(test: any): void;
-    onRunnerEnd(): void;
+    onSuiteEnd(): void;
     private validate;
 }
 export = TestRailReporter;
