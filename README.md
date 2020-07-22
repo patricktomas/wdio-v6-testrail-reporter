@@ -1,7 +1,7 @@
 # WebdriverIO v6 Mocha Testrail Reporter
 
 ====================
-> A WebdriverIO v6 reporter for Testrail. Yes, it works on my machine.
+> A WebdriverIO v6 reporter for Testrail. HAS MAJOR BUG PLEASE DONT USE
 > For v4 version see [original reporter](https://github.com/oxynade/wdio-testrail-reporter)
 
 ## Configuration
