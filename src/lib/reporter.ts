@@ -12,7 +12,9 @@ class TestRailReporter extends WDIOReporter {
   private fails;
   private pending;
   private out;
+  private runId;
 
+  public client = new TestRail(this.options);
   constructor(options) {
     super(options);
     options = Object.assign(options, { stdout: false });
@@ -22,16 +24,19 @@ class TestRailReporter extends WDIOReporter {
     this.validate(options, 'password');
     this.validate(options, 'projectId');
     this.validate(options, 'suiteId');
-    this.validate(options, 'runName');
 
     // compute base url
     this.options = options;
-
     this.results = [];
     this.passes = 0;
     this.fails = 0;
     this.pending = 0;
     this.out = [];
+  }
+
+  async onSuiteStart() {
+    const lastRun = await this.client.getLastTestRun(this.options.projectId, this.options.suiteId);
+    this.runId = lastRun[0].id;
   }
 
   onTestPass(test) {
@@ -59,8 +64,10 @@ class TestRailReporter extends WDIOReporter {
         this.results.push(...results);
       }
     }
+    this.client.addResultsForCases(this.runId, this.results);
   }
-  onTestFail(test) {
+
+  async onTestFail(test) {
     this.fails++;
     this.out.push(test.title + ': fail');
     let caseIds = titleToCaseIds(test.title);
@@ -74,26 +81,17 @@ class TestRailReporter extends WDIOReporter {
       });
       this.results.push(...results);
     }
+    this.client.addResultsForCases(this.runId, this.results);
   }
-  onSuiteEnd() {
+
+  async onSuiteEnd() {
     if (this.results.length == 0) {
       this.log.error(
         'No testcases were matched. Ensure that your tests are declared correctly and matches format Cxxx. For example C420',
       );
     }
-    let executionDateTime = new Date().toISOString();
-    let total = this.passes + this.fails + this.pending;
-    let name = this.options.runName;
-    let description = `Automated test run executed on ${executionDateTime}
-Execution summary:
-Passes: ${this.passes}
-Fails: ${this.fails}
-Pending: ${this.pending}
-Total: ${total}
-Execution details:
-`;
-    new TestRail(this.options).publish(name, description, this.results);
   }
+
   private validate(options, name: string) {
     if (options == null) {
       throw new Error('Missing options. Please look into documentation');

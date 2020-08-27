@@ -1,4 +1,4 @@
-import request = require('unirest');
+const axios = require('axios');
 import logger from '@wdio/logger';
 import { TestRailOptions, TestRailResult } from './testrail.interface';
 
@@ -6,123 +6,50 @@ import { TestRailOptions, TestRailResult } from './testrail.interface';
  * TestRail basic API wrapper
  */
 export class TestRail {
-  private base: String;
   private log;
 
   constructor(private options: TestRailOptions) {
     // compute base url
-    this.base = `https://${options.testRailUrl}/index.php`;
-    this.log = logger('wdio-testrail-reporter');
+    axios.defaults.baseURL = `https://${options.testRailUrl}/index.php?/api/v2/`;
+    axios.defaults.headers.common['Content-Type'] = 'application/json';
+    this.log = logger('wdio-v6-testrail-reporter');
   }
 
-  private _post(api: String, body: any, callback: Function, error?: Function) {
-    var req = request('POST', this.base)
-      .query(`/api/v2/${api}`)
-      .headers({
-        'content-type': 'application/json',
-      })
-      .type('json')
-      .send(body)
-      .auth(this.options.username, this.options.password)
-      .end((res) => {
-        if (res.error) {
-          this.log.error('Error: %s', JSON.stringify(res.body));
-          if (error) {
-            error(res.error);
-          } else {
-            throw new Error(res.error);
-          }
-        }
-        callback(res.body);
+  async _get(endpoint: string) {
+    try {
+      const response = await axios.get(endpoint, {
+        auth: {
+          username: this.options.username,
+          password: this.options.password,
+        },
       });
-  }
-
-  private _get(api: String, callback: Function, error?: Function) {
-    var req = request('GET', this.base)
-      .query(`/api/v2/${api}`)
-      .headers({
-        'content-type': 'application/json',
-      })
-      .type('json')
-      .auth(this.options.username, this.options.password)
-      .end((res) => {
-        if (res.error) {
-          this.log.error('Error: %s', JSON.stringify(res.body));
-          if (error) {
-            error(res.error);
-          } else {
-            throw new Error(res.error);
-          }
-        }
-        callback(res.body);
-      });
-  }
-
-  /**
-   * Fetchs test cases from projet/suite based on filtering criteria (optional)
-   * @param {{[p: string]: number[]}} filters
-   * @param {Function} callback
-   */
-  public fetchCases(filters?: { [key: string]: number[] }, callback?: Function): void {
-    let filter = '';
-    if (filters) {
-      for (var key in filters) {
-        if (filters.hasOwnProperty(key)) {
-          filter += '&' + key + '=' + filters[key].join(',');
-        }
-      }
+      return response.data;
+    } catch (error) {
+      console.log('Error: %s', JSON.stringify(error.body));
     }
-
-    let req = this._get(
-      `get_cases/${this.options.projectId}&suite_id=${this.options.suiteId}${filter}`,
-      (body) => {
-        if (callback) {
-          callback(body);
-        }
-      },
-    );
   }
 
-  /**
-   * Publishes results of execution of an automated test run
-   * @param {string} name
-   * @param {string} description
-   * @param {TestRailResult[]} results
-   * @param {Function} callback
-   */
-  public publish(
-    name: string,
-    description: string,
-    results: TestRailResult[],
-    callback?: Function,
-  ): void {
-    this.log.info(`Publishing ${results.length} test result(s) to ${this.options.testRailUrl}`);
+  async _post(endpoint: string, body: object) {
+    try {
+      const response = await axios.post(endpoint, body, {
+        auth: {
+          username: this.options.username,
+          password: this.options.password,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      this.log.error('Error: %s', JSON.stringify(error.body));
+    }
+  }
 
-    this._post(
-      `add_run/${this.options.projectId}`,
-      {
-        suite_id: this.options.suiteId,
-        name: name,
-        description: description,
-        assignedto_id: this.options.assignedToId,
-        include_all: true,
-      },
-      (body) => {
-        const runId = body.id;
-        this.log.info(`Results published to ${this.base}?/runs/view/${runId}`);
-        this._post(
-          `add_results_for_cases/${runId}`,
-          {
-            results: results,
-          },
-          (body) => {
-            // execute callback if specified
-            if (callback) {
-              callback();
-            }
-          },
-        );
-      },
-    );
+  public addResultsForCases(runID, results: TestRailResult[]) {
+    this._post(`add_results_for_cases/${runID}`, {
+      results: results,
+    });
+  }
+
+  public getLastTestRun(projectId, suiteId) {
+    return this._get(`get_runs/${projectId}&suite_id=${suiteId}&limit=1`);
   }
 }
