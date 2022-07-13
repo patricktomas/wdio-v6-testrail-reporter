@@ -32,23 +32,23 @@
     "build": "yarn clean && yarn prettier && yarn tsc"
   },
   "dependencies": {
-    "btoa": "^1.1.2",
-    "unirest": "^0.5.1"
+    "btoa": "^1.2.1",
+    "unirest": "^0.6.0"
   },
   "peerDependencies": {
-    "mocha": "^3 || ^2.2.5"
+    "mocha": "^10.0.0"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.34",
-    "@types/mocha": "^2.2.36",
-    "@types/node": "^6.0.58",
-    "@wdio/logger": "^6.0.16",
-    "@wdio/reporter": "^6.3.0",
-    "axios": "^0.19.2",
-    "chai": "^3.5.0",
-    "mocha": "^8.0.1",
-    "prettier": "^2.0.5",
-    "rimraf": "^2.5.4",
-    "typescript": "^2.1.4"
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.0.4",
+    "@wdio/logger": "^7.19.0",
+    "@wdio/reporter": "^7.20.3",
+    "axios": "^0.27.2",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.4"
   }
 }
