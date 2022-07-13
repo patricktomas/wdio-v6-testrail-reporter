@@ -36,7 +36,7 @@ class TestRailReporter extends WDIOReporter {
 
   async onSuiteStart() {
     const lastRun = await this.client.getLastTestRun(this.options.projectId, this.options.suiteId);
-    this.runId = lastRun[0].id;
+    this.runId = lastRun.runs[0].id;
   }
 
   onTestPass(test) {
