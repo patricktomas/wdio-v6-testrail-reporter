@@ -34,7 +34,7 @@ class TestRailReporter extends reporter_1.default {
     onSuiteStart() {
         return __awaiter(this, void 0, void 0, function* () {
             const lastRun = yield this.client.getLastTestRun(this.options.projectId, this.options.suiteId);
-            this.runId = lastRun[0].id;
+            this.runId = lastRun.runs[0].id;
         });
     }
     onTestPass(test) {
